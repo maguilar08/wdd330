@@ -1,12 +1,19 @@
-import { renderListWithTemplate } from "./utils.mjs";
+import { renderListWithTemplate, calculateDiscount } from "./utils.mjs";
 
 function productCardTemplate(product) {
+    //W02 Indiv.Task
+    const discount = calculateDiscount(
+        product.SuggestedRetailPrice,
+        product.FinalPrice
+    );
+
     return `<li class="product-card">
     <a href="product_pages/?product=${product.Id}">
       <img src="${product.Image}" alt="Image of ">
       <h2 class="card__brand">${product.Brand.Name}</h2>
       <h3 class="card__name">${product.NameWithoutBrand}</h3>
       <p class="product-card__price">$${product.FinalPrice}</p>
+      ${discount > 0 ? `<span class="discount-badge">${discount}% OFF</span>` : ""}
     </a>
   </li>`;
 }

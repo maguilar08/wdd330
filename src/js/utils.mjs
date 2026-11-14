@@ -45,3 +45,15 @@ export function renderListWithTemplate(
   const htmlStrings = list.map(templateFn);
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
+
+//W02 Individual Task
+export function calculateDiscount(originalPrice, finalPrice) {
+  const original = Number(originalPrice);
+  const final = Number(finalPrice);
+
+  if (!Number.isFinite(original) || !Number.isFinite(final) || original <= 0 || final >= original) {
+    return 0;
+  }
+
+  return Math.round(((original - final) / original) * 100);
+}
