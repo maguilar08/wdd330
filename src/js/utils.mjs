@@ -57,3 +57,40 @@ export function calculateDiscount(originalPrice, finalPrice) {
 
   return Math.round(((original - final) / original) * 100);
 }
+
+// W03 Team Activity
+export function renderWithTemplate(template, parentElement, data, callback) {
+  parentElement.innerHTML = template;
+  if (callback) {
+    callback(data);
+  }
+}
+
+// W03 Team Activity - Load an HTML template
+export async function loadTemplate(path) {
+  const response = await fetch(path);
+
+  // Check if the request failed (e.g., 404 Not Found) and throw an error.
+  //  if (!response.ok) {
+  //   throw new Error(`Failed to load template: ${response.status}`);
+  // }
+
+  const template = await response.text();
+  return template;
+}
+
+// W03 Team Activity - Load and display the header and footer
+export async function loadHeaderFooter() {
+  // Load the HTML templates
+  // Use an absolute path from the website root so the templates load correctly on all pages.
+  const headerTemplate = await loadTemplate("/partials/header.html");
+  const footerTemplate = await loadTemplate("/partials/footer.html");
+
+  // Find the header and footer elements in the HTML
+  const headerElement = document.querySelector("#main-header");
+  const footerElement = document.querySelector("#main-footer");
+
+  // Insert the templates into the elements
+  renderWithTemplate(headerTemplate, headerElement);
+  renderWithTemplate(footerTemplate, footerElement);
+}

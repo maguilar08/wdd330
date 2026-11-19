@@ -1,5 +1,9 @@
 import ProductData from "./ProductData.mjs";
 import ProductList from "./ProductList.mjs";
+import { loadHeaderFooter } from "./utils.mjs";
+
+// W03 TA: Load the shared header and footer
+loadHeaderFooter();
 
 const dataSource = new ProductData("tents");
 
