@@ -11,10 +11,12 @@ function renderCartContents() {
 }
 
 function cartItemTemplate(item) {
+  const image = item.Images?.PrimaryMedium || item.Image;
+  //src="${item.Image}" this was before using API
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
-    <img
-      src="${item.Image}"
+    <img    
+      src="${image}"
       alt="${item.Name}"
     />
   </a>
