@@ -93,4 +93,13 @@ export async function loadHeaderFooter() {
   // Insert the templates into the elements
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
+
+  // W03 Individual task - Display the number of products saved in the shopping cart.
+  const cartItems = getLocalStorage("so-cart") || [];
+  const cartCount = document.querySelector(".cart-count");
+
+  if (cartCount && cartItems.length > 0) {
+    cartCount.textContent = cartItems.length;
+    cartCount.hidden = false;
+  }
 }
