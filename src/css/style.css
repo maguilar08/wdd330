@@ -252,6 +252,40 @@ button {
   margin-top: 0.5rem;
 }
 
+/* W03 Individual Activity: Product Categories */
+
+.product-categories {
+  padding: 1rem;
+  text-align: center;
+}
+
+.category-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 2rem auto;
+}
+
+.category-list a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.category-list img {
+  width: 100%;
+  max-width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.category-list h3 {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
@@ -265,6 +299,10 @@ button {
   .cart-card {
     font-size: inherit;
     grid-template-columns: 150px auto 15%;
+  }
+
+  .category-list {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 

@@ -29,8 +29,9 @@ export default class ProductDetails {
         `$${this.product.FinalPrice.toFixed(2)}`;
 
         const productImage = document.querySelector(".product-detail img");
-
-        productImage.src = this.product.Image;
+        // to use API
+        //productImage.src = this.product.Image;
+        productImage.src = this.product.Images.PrimaryLarge;
         productImage.alt = this.product.Name;
 
         document.querySelector(".product__description").innerHTML =
