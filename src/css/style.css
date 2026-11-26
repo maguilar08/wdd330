@@ -312,6 +312,11 @@ button {
   display: none;
 }
 
+/* Total cart W04 IA*/
+.hide {
+  display: none;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
