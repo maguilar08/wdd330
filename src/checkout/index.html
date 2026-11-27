@@ -20,7 +20,6 @@
         <h2>Review & Place your Order</h2>
 
         <form id="checkout-form" name="checkout">
-
           <fieldset>
             <legend>Customer Information</legend>
 
@@ -54,7 +53,13 @@
             <input type="text" id="cardNumber" name="cardNumber" required />
 
             <label for="expiration">Expiration Date</label>
-            <input type="text" id="expiration" name="expiration" placeholder="MM/YY" required />
+            <input
+              type="text"
+              id="expiration"
+              name="expiration"
+              placeholder="MM/YY"
+              required
+            />
 
             <label for="code">Security Code</label>
             <input type="text" id="code" name="code" required />
@@ -63,6 +68,8 @@
           <fieldset class="order-summary">
             <legend>Order Summary</legend>
 
+            <p>Number of items: <span id="item-count">0</span></p>
+
             <p>Subtotal: <span id="subtotal">$0.00</span></p>
             <p>Tax: <span id="tax">$0.00</span></p>
             <p>Shipping Estimate: <span id="shipping">$0.00</span></p>
@@ -70,7 +77,6 @@
           </fieldset>
 
           <button type="submit">Checkout</button>
-
         </form>
       </section>
     </main>

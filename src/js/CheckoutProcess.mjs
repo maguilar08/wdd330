@@ -1,5 +1,31 @@
 import { getLocalStorage } from "./utils.mjs";
 
+import ExternalServices from "./ExternalServices.mjs";
+
+// W04 TA: Prepare cart items for checkout
+function packageItems(items) {
+    return items.map((item) => {
+        return {
+            id: item.Id,
+            name: item.Name,
+            price: Number(item.FinalPrice),
+            quantity: 1
+        };
+    });
+}
+
+// W04 TA: Convert form data into an object
+function formDataToJSON(formElement) {
+    const formData = new FormData(formElement),
+        convertedJSON = {};
+
+    formData.forEach(function (value, key) {
+        convertedJSON[key] = value;
+    });
+
+    return convertedJSON;
+}
+
 export default class CheckoutProcess {
     constructor(key, outputSelector) {
         this.key = key;
@@ -25,11 +51,11 @@ export default class CheckoutProcess {
             return sum + Number(item.FinalPrice);
         }, 0);
 
-        const subtotal = document.querySelector(
-            `${this.outputSelector} #subtotal`
-        );
-
+        const subtotal = document.querySelector(`${this.outputSelector} #subtotal`);
         subtotal.textContent = `$${this.itemTotal.toFixed(2)}`;
+
+        const itemCount = document.querySelector(`${this.outputSelector} #item-count`);
+        itemCount.textContent = this.itemCount;
     }
 
     calculateOrderTotal() {
@@ -55,5 +81,31 @@ export default class CheckoutProcess {
         tax.innerText = `$${this.tax.toFixed(2)}`;
         shipping.innerText = `$${this.shipping.toFixed(2)}`;
         orderTotal.innerText = `$${this.orderTotal.toFixed(2)}`;
+    }
+
+    // W04 TA: Prepare and submit the order
+    // get the form element data by the form name
+    // convert the form data to a JSON order object using the formDataToJSON function
+    // populate the JSON order object with the order Date, orderTotal, tax, shipping, and list of items
+    // call the checkout method in the ExternalServices module and send it the JSON order data.
+    async checkout(form) {
+        // Convert the form data into an object
+        const order = formDataToJSON(form);
+
+        // Calculate the final totals
+        this.calculateOrderTotal();
+
+        // Populate the order object
+        order.orderDate = new Date().toISOString();
+        order.orderTotal = this.orderTotal.toFixed(2);
+        order.tax = this.tax.toFixed(2);
+        order.shipping = this.shipping;
+        order.items = packageItems(this.list);
+
+        // Send the order to ExternalServices
+        const services = new ExternalServices();
+        const response = await services.checkout(order);
+
+        return response;
     }
 }
