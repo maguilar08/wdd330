@@ -41,7 +41,7 @@
 // ========================================
 
 import { getParam } from "./utils.mjs";
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 import ProductDetails from "./ProductDetails.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
 
@@ -51,7 +51,8 @@ loadHeaderFooter();
 const productId = getParam("product");
 //to use API
 //const dataSource = new ProductData("tents");
-const dataSource = new ProductData();
+// Renamed ProductData to ExternalServices
+const dataSource = new ExternalServices();
 
 const productDetails = new ProductDetails(productId, dataSource);
 productDetails.init();

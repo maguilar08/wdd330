@@ -15,12 +15,9 @@ function renderCartContents() {
   if (cartItems.length > 0) {
     cartFooter.classList.remove("hide");
 
-    const total = cartItems.reduce((sum, item) => {
-      return sum + Number(item.FinalPrice);
-    }, 0);
+    const total = cartItems.reduce((sum, item) => sum + Number(item.FinalPrice), 0);
 
-    document.querySelector("#cart-total").textContent =
-      `$${total.toFixed(2)}`;
+    document.querySelector("#cart-total").textContent = `$${total.toFixed(2)}`;
   } else {
     cartFooter.classList.add("hide");
   }
